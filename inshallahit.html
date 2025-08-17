@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise 🎂🎈✨</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: linear-gradient(180deg, #ff9a9e 0%, #fad0c4 100%);
+        overflow: hidden;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .birthday-message {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+        animation: glow 2s ease-in-out infinite alternate;
+        margin-bottom: 20px;
+        z-index: 5;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 2px 2px 8px rgba(0,0,0,0.3), 0 0 10px #fff; }
+        to { text-shadow: 2px 2px 8px rgba(0,0,0,0.3), 0 0 25px #FF1493, 0 0 35px #FFD700; }
+    }
+
+    .cake-container {
+        position: relative;
+        text-align: center;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cake {
+        width: 626px;
+        height: 417px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 2;
+    }
+
+    .flame {
+        position: absolute;
+        width: 20px;
+        height: 40px;
+        background: radial-gradient(circle, #ff6b35, #f7931e, #ffcc02);
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        top: -50px;
+        animation: flicker 0.5s infinite alternate;
+        box-shadow: 0 0 20px #ff6b35;
+    }
+
+    .flame::before {
+        content: '';
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 12px;
+        height: 25px;
+        background: radial-gradient(circle, #ffcc02, #f7931e);
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    }
+
+    @keyframes flicker {
+        0% { transform: translateY(0) scale(1) rotate(-1deg); opacity:1; }
+        25% { transform: translateY(-3px) scale(1.05) rotate(1deg); opacity:0.9; }
+        50% { transform: translateY(-1px) scale(1.1) rotate(-0.5deg); opacity:0.8; }
+        75% { transform: translateY(-2px) scale(1.03) rotate(0.5deg); opacity:0.9; }
+        100% { transform: translateY(0) scale(1) rotate(0deg); opacity:1; }
+    }
+
+    .sparkle-btn {
+        margin-top: 25px;
+        padding: 15px 30px;
+        font-size: 1.3rem;
+        background: linear-gradient(45deg, #FF1493, #8A2BE2);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        z-index: 5;
+    }
+
+    .sparkle-btn:hover {
+        transform: scale(1.08) translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
+        background: linear-gradient(45deg, #FF1493, #9932CC);
+    }
+
+    .confetti {
+        position: absolute;
+        font-size: 20px;
+        opacity: 0.9;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    /* Balloons */
+    .balloon {
+        position: absolute;
+        bottom: -150px;
+        width: 50px;
+        height: 70px;
+        border-radius: 50% 50% 50% 50%;
+        opacity: 0.95;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .balloon::after {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 30px;
+        background: #333;
+        left: 50%;
+        bottom: -30px;
+    }
+
+    .red { background: #FF4B5C; }
+    .blue { background: #4A90E2; }
+    .yellow { background: #FFD700; }
+    .green { background: #32CD32; }
+    .pink { background: #FF69B4; }
+
+    /* Lights */
+    .light {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        box-shadow: 0 0 15px #fff, 0 0 25px #fff;
+        top: 20px;
+        z-index: 3;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px){
+        .cake { width: 90vw; height: auto; }
+        .sparkle-btn { font-size: 1.1rem; padding: 12px 25px; }
+    }
+
+    @media (max-width: 480px){
+        .cake { width: 95vw; height: auto; }
+        .sparkle-btn { font-size: 1rem; padding: 10px 20px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="birthday-message">🎉 Happy Birthday Markgreat! 🎉</div>
+
+<div class="cake-container">
+    <img src="cake.png" alt="Birthday Cake" class="cake">
+    <div class="flame" style="left: 150px;"></div>
+    <div class="flame" style="left: 250px;"></div>
+    <div class="flame" style="left: 350px;"></div>
+    <div class="flame" style="left: 450px;"></div>
+    <button class="sparkle-btn" onclick="makeSparkle()">🎉 Make it Sparkle! ✨</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+    // Confetti across entire page
+    function makeSparkle() {
+        const colors = ['#FF1493','#FFD700','#8A2BE2','#FF4500','#00BFFF','#32CD32','#FF69B4','#FFA500'];
+        const shapes = ['✨','⭐','💖','🌟','🎊','💫','🔥','🎈','🎁','🍰'];
+
+        for (let i = 0; i < 80; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
+            confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.top = '-30px';
+            document.body.appendChild(confetti);
+
+            const fallDuration = Math.random() * 3 + 2;
+            const xMovement = (Math.random() - 0.5) * 200;
+            const rotation = Math.random() * 720;
+
+            confetti.animate([
+                { transform: `translate(0,0) rotate(0deg) scale(0.5)`, opacity:0 },
+                { transform: `translate(${xMovement/2}px, 200px) rotate(${rotation/2}deg) scale(1)`, opacity:1 },
+                { transform: `translate(${xMovement}px, ${window.innerHeight + 50}px) rotate(${rotation}deg) scale(0.3)`, opacity:0 }
+            ], {
+                duration: fallDuration * 1000,
+                easing: 'cubic-bezier(0.25,0.46,0.45,0.94)'
+            });
+
+            setTimeout(()=>confetti.remove(), fallDuration * 1000);
+        }
+    }
+
+    // Balloons
+    const colors = ['red','blue','yellow','green','pink'];
+    for(let i=0;i<25;i++){
+        const balloon = document.createElement('div');
+        balloon.classList.add('balloon',colors[Math.floor(Math.random()*colors.length)]);
+        balloon.style.left = Math.random()*window.innerWidth+'px';
+        document.body.appendChild(balloon);
+
+        gsap.to(balloon,{
+            y: -(window.innerHeight + 200),
+            duration: 12 + Math.random()*4,
+            repeat: -1,
+            ease: "sine.inOut",
+            delay: Math.random()*5,
+            onRepeat: ()=>{ balloon.style.left = Math.random()*window.innerWidth+'px'; }
+        });
+
+        balloon.addEventListener('click', ()=>{
+            gsap.to(balloon,{ scale:0, opacity:0, duration:0.5, ease:"back.in(1.7)", onComplete:()=>balloon.remove() });
+        });
+    }
+
+    // Twinkling Lights
+    const lightCount = 25;
+    for(let i=0;i<lightCount;i++){
+        const light = document.createElement('div');
+        light.classList.add('light');
+        light.style.left = Math.random()*window.innerWidth+'px';
+        light.style.top = Math.random()*120+'px';
+        const hue = Math.random()*360;
+        light.style.background = `hsl(${hue},90%,65%)`;
+        document.body.appendChild(light);
+
+        gsap.to(light,{
+            opacity: 0.3 + Math.random()*0.7,
+            scale: 0.5 + Math.random()*0.8,
+            duration: 0.5 + Math.random(),
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+    }
+</script>
+
+</body>
+</html>
